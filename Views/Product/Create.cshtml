@@ -1,0 +1,40 @@
+﻿@using ProgPoe_MVC_AgriEnergyConnect.Data.Enum
+@using ProgPoe_MVC_AgriEnergyConnect.Models
+@using ProgPoe_MVC_AgriEnergyConnect.ViewModels
+@model CreateProductViewModel
+
+<form method="post" asp-action="Create" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Name">Product Name</label>
+        <input asp-for="Name" class="form-control" placeholder="Type name of product">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Description</label>
+        <input asp-for="Description" class="form-control" placeholder="Type description of product">
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Price">Price</label>
+        <input asp-for="Price" class="form-control" placeholder="Type price in ZAR">
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ProductDate">Production Date</label>
+        <input asp-for="ProductDate" class="form-control" placeholder="Select Date" type="date">
+        <span asp-validation-for="ProductDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Categories">Category</label>
+        <select asp-for="Categories" asp-items="@Html.GetEnumSelectList<ProductCategories>()" class="form-control form-control-lg">
+            <option>--Select--</option>
+        </select>
+        <span asp-validation-for="Categories" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Image">Upload Image</label>
+        <input asp-for="Image" type="file" class="form-control" placeholder="Choose Image">
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>   
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
