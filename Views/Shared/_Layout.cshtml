@@ -4,15 +4,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ProgPoe_MVC_AgriEnergyConnect</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ProgPoe_MVC_AgriEnergyConnect.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ProgPoe_MVC_AgriEnergyConnect</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Agri Energy Connect</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,51 +20,51 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-ligth" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            <a class="nav-link text-ligth" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
                         </li>
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Employee"))
                         {
                             @*------------------------------ Employee can View farmers accounts and choose to delete them*@
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Farmer" asp-action="Index">View Profiles</a>
+                                <a class="nav-link text-ligth" asp-area="" asp-controller="Farmer" asp-action="Index">View Profiles</a>
                             </li>
                             @*------------------------------ Employee can view farmer products*@
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="ProductFilter">View Products</a>
+                                <a class="nav-link text-ligth" asp-area="" asp-controller="Product" asp-action="ProductFilter">View Products</a>
                             </li>
                             @*------------------------------ Employee can register farmers accounts*@
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register Farmer</a>
+                                <a class="nav-link text-ligth" asp-area="" asp-controller="Account" asp-action="Register">Register Farmer</a>
                             </li>
                             @*------------------------------ Employee can Log Out*@
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Log Out</a>
+                                <a class="nav-link text-ligth" asp-area="" asp-controller="Account" asp-action="Logout">Log Out</a>
                             </li>
                         }
                         else if (User.Identity.IsAuthenticated && User.IsInRole("Farmer"))
                         {             
                             @*------------------------------ Farmer can create his profile*@
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Farmer" asp-action="Create">Create Profile</a>
+                                <a class="nav-link text-ligth" asp-area="" asp-controller="Farmer" asp-action="Create">Create Profile</a>
                             </li>
                             @*------------------------------ Farmer can view his profile*@
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Farmer" asp-action="Index">Your Profile</a>
+                                <a class="nav-link text-ligth" asp-area="" asp-controller="Farmer" asp-action="Index">Your Profile</a>
                             </li>
                             @*------------------------------ Farmer can create a product*@
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Create">Create Product</a>
+                                <a class="nav-link text-ligth" asp-area="" asp-controller="Product" asp-action="Create">Create Product</a>
                             </li>
                             @*------------------------------ Farmer can view his products*@
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">View Products</a>
+                                <a class="nav-link text-ligth" asp-area="" asp-controller="Product" asp-action="Index">View Products</a>
                             </li>                          
                             @*------------------------------ Farmer can Log Out*@
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Log Out</a>
+                                <a class="nav-link text-ligth" asp-area="" asp-controller="Account" asp-action="Logout">Log Out</a>
                             </li>
                         }
                     </ul>
@@ -72,6 +72,10 @@
             </div>
         </nav>
     </header>
+    <br />
+    <br />
+    <br />
+    <br />
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -80,7 +84,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - ProgPoe_MVC_AgriEnergyConnect - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - Agri Energy Connect
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
