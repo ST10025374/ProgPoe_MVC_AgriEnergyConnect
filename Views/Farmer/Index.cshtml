@@ -15,7 +15,10 @@
                             <img class="card-img-top" src="@farmer.ProfileImage" alt="Profile Image" style="object-fit: cover; height: 225px;">
                             <div class="card-body">
                                 <h5 class="card-title">@farmer.FirstName  @farmer.LastName</h5>
-                                <p class="card-text">@farmer.Province</p>
+                                <p class="card-text">Address: @farmer.Location</p>
+                                <p class="card-text">City: @farmer.City</p>
+                                <p class="card-text">Province: @farmer.Province</p>
+                                <p class="card-text">Phone Number: @farmer.PhoneNumber</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         @* <a asp-controller="Farmer" asp-action="Edit" asp-route-id="@farmer.Id" class="btn btn-sm btn-outline-primary">Edit</a> *@

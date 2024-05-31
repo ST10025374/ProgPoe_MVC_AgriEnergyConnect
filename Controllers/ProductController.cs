@@ -35,6 +35,34 @@ namespace ProgPoe_MVC_AgriEnergyConnect.Controllers
 
         //---------------------------------------------------------------------//
         /// <summary>
+        /// Retrieves all products and returns the view with the products.
+        /// </summary>
+        /// <param name="startDate">The start date for filtering products.</param>
+        /// <param name="endDate">The end date for filtering products.</param>
+        /// <param name="category">The category for filtering products.</param>
+        /// <returns>The view with the filtered products.</returns>
+        public async Task<IActionResult> ProductFilter(DateTime? startDate, DateTime? endDate, string category)
+        {
+            // Populate ViewBag.Categories with the list of categories
+            var categories = await _productRepository.GetAllCategories();
+            ViewBag.Categories = categories;
+
+            IEnumerable<Product> products;
+
+            if (startDate.HasValue && endDate.HasValue && !string.IsNullOrEmpty(category))
+            {
+                products = await _productRepository.GetFilteredProducts(startDate.Value, endDate.Value, category);
+            }
+            else
+            {
+                products = await _productRepository.GetAll();
+            }
+
+            return View(products);
+        }
+
+        //---------------------------------------------------------------------//
+        /// <summary>
         /// Retrieves View for creating a new product.
         /// </summary>
         /// <returns></returns>

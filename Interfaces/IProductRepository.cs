@@ -1,4 +1,5 @@
-﻿using ProgPoe_MVC_AgriEnergyConnect.Models;
+﻿using ProgPoe_MVC_AgriEnergyConnect.Data.Enum;
+using ProgPoe_MVC_AgriEnergyConnect.Models;
 
 namespace ProgPoe_MVC_AgriEnergyConnect.Interfaces
 {
@@ -23,6 +24,21 @@ namespace ProgPoe_MVC_AgriEnergyConnect.Interfaces
         /// <param name="id"></param>
         /// <returns></returns>
         Task<Product?> GetProductByIdAsyncNoTracking(int id);
+
+        /// <summary>
+        /// Filtering Logic
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        Task<IEnumerable<Product>> GetFilteredProducts(DateTime startDate, DateTime endDate, string category);
+
+        /// <summary>
+        /// Get all categories
+        /// </summary>
+        /// <returns></returns>
+        Task<IEnumerable<ProductCategories>> GetAllCategories();
 
         /// <summary>
         /// Get products by name

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProgPoe_MVC_AgriEnergyConnect.Data;
+using ProgPoe_MVC_AgriEnergyConnect.Data.Enum;
 using ProgPoe_MVC_AgriEnergyConnect.Interfaces;
 using ProgPoe_MVC_AgriEnergyConnect.Models;
 
@@ -62,6 +63,38 @@ namespace ProgPoe_MVC_AgriEnergyConnect.Repository
         public async Task<Product> GetProductById(int id)
         {
             return await _context.Products.FirstOrDefaultAsync(i => i.ProductId == id);
+        }
+
+        //---------------------------------------------------------------------//
+        /// <summary>
+        /// Filtering logic
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<Product>> GetFilteredProducts(DateTime startDate, DateTime endDate, string category)
+        {
+            var products = await _context.Products
+                                         .Where(p => p.ProductDate >= startDate && p.ProductDate <= endDate)
+                                         .ToListAsync();
+
+            if (!string.IsNullOrEmpty(category))
+            {
+                products = products.Where(p => p.Categories.ToString() == category).ToList();
+            }
+
+            return products;
+        }
+
+        //---------------------------------------------------------------------//
+        /// <summary>
+        /// Get all categories
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IEnumerable<ProductCategories>> GetAllCategories()
+        {
+            return Enum.GetValues(typeof(ProductCategories)).Cast<ProductCategories>();
         }
 
         //---------------------------------------------------------------------//

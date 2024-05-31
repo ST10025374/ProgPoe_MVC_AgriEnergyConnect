@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Product>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<AppUser> UserManager
+
+<div class="album py-5 bg-light">
+    <div class="container" style="max-height: 80vh; overflow-y: auto;">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Employee"))
+            {
+                <form asp-controller="Product" asp-action="ProductFilter" method="get">
+                    <div class="form-row mb-3">
+                        <div class="col-md-3">
+                            <label for="startDate">Start Date:</label>
+                            <input type="date" class="form-control" id="startDate" name="startDate">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="endDate">End Date:</label>
+                            <input type="date" class="form-control" id="endDate" name="endDate">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="category">Category:</label>
+                            <select class="form-control" id="category" name="category">
+                                <option value="">All Categories</option>
+                                @foreach (var category in ViewBag.Categories)
+                                {
+                                    <option value="@category">@category</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-primary mt-3">Filter</button>
+                        </div>
+                    </div>
+                </form>
+
+                @foreach (var product in Model)
+                {
+                    <div class="col">
+                        <div class="card shadow-sm h-100">
+                            <img class="card-img-top" src="@product.ProductImage" alt="Product Image" style="object-fit: cover; height: 225px;">
+                            <div class="card-body">
+                                <h5 class="card-title">@product.Name</h5>
+                                <p class="card-text">Category: @product.Categories</p>
+                                <p class="card-text">Price: R @product.Price</p>
+                                <p class="card-text">Production Date: @product.ProductDate.ToString("dd/MM/yyyy")</p>
+                                <p class="card-text">Description: @product.Description</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>Please log in as an employee to filter and manage products.</p>
+            }
+        </div>
+    </div>
+</div>
