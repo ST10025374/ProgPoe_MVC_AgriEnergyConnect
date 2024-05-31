@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProgPoe_MVC_AgriEnergyConnect.Data;
 using ProgPoe_MVC_AgriEnergyConnect.Models;
+using ProgPoe_MVC_AgriEnergyConnect.Interfaces;
 
 namespace ProgPoe_MVC_AgriEnergyConnect.Repository
 {
-    public class FarmerRepository
+    public class FarmerRepository : IFarmerRepository
     {
         private readonly ApplicationDbContext _context;
 
@@ -53,11 +54,27 @@ namespace ProgPoe_MVC_AgriEnergyConnect.Repository
 
         //---------------------------------------------------------------------//
         /// <summary>
+        /// Retrieves a farmer's ID by their AppUserId from the database.
+        /// </summary>
+        /// <param name="appUserId">The AppUserId of the farmer to retrieve.</param>
+        /// <returns>The farmer's ID with the specified AppUserId, or null if not found.</returns>
+        public async Task<int?> GetFarmerIdByAppUserId(string appUserId)
+        {
+            var farmerId = await _context.Farmers
+                .Where(f => f.AppUserId == appUserId)
+                .Select(f => f.Id) 
+                .FirstOrDefaultAsync();
+
+            return farmerId;
+        }
+
+        //---------------------------------------------------------------------//
+        /// <summary>
         /// Retrieves a farmer by their ID from the database without tracking changes.
         /// </summary>
         /// <param name="id">The ID of the farmer to retrieve.</param>
         /// <returns>The farmer with the specified ID, or null if not found.</returns>
-        public async Task<Farmer> GetFarmerIdAsyncNoTracking(int id)
+        public async Task<Farmer> GetFarmerByIdAsyncNoTracking(int id)
         {
             return await _context.Farmers.Include(i => i.AppUser).AsNoTracking().FirstOrDefaultAsync(i => i.Id == id);
         }
@@ -68,7 +85,7 @@ namespace ProgPoe_MVC_AgriEnergyConnect.Repository
         /// </summary>
         /// <param name="name">The first name to search for.</param>
         /// <returns>A collection of farmers with matching first names.</returns>
-        public async Task<IEnumerable<Farmer>> GetProductByName(string name)
+        public async Task<IEnumerable<Farmer>> GetFarmerByName(string name)
         {
             return await _context.Farmers.Where(n => n.FirstName.Contains(name)).ToListAsync();
         }

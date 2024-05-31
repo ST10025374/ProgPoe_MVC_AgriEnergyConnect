@@ -1,3 +1,59 @@
-﻿@using ProgPoe_MVC_AgriEnergyConnect.Models
-@model Farmer
+﻿@model IEnumerable<Farmer>
+@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<AppUser> UserManager
+
+<div class="album py-5 bg-light">
+    <div class="container" style="max-height: 80vh; overflow-y: auto;">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Employee"))
+            {
+                @foreach (var farmer in Model)
+                {
+                    <div class="col">
+                        <div class="card shadow-sm h-100">
+                            <img class="card-img-top" src="@farmer.ProfileImage" alt="Profile Image" style="object-fit: cover; height: 225px;">
+                            <div class="card-body">
+                                <h5 class="card-title">@farmer.FirstName  @farmer.LastName</h5>
+                                <p class="card-text">@farmer.Province</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        @* <a asp-controller="Farmer" asp-action="Edit" asp-route-id="@farmer.Id" class="btn btn-sm btn-outline-primary">Edit</a> *@
+                                        @* <a asp-controller="Farmer" asp-action="View" asp-route-id="@farmer.Id" class="btn btn-sm btn-outline-primary">View Profile</a> *@
+                                        <form asp-controller="Farmer" asp-action="Delete" asp-route-id="@farmer.Id" method="post" onsubmit="return confirm('Are you sure you want to delete this Farmer Profile');" style="display: inline;">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else if (User.Identity.IsAuthenticated && User.IsInRole("Farmer"))
+            {
+                var currentUserId = UserManager.GetUserId(User);
+
+                @foreach (var farmer in Model.Where(p => p.AppUserId == currentUserId))
+                {
+                    <div class="col">
+                        <div class="card shadow-sm h-100">
+                            <img class="card-img-top" src="@farmer.ProfileImage" alt="Profile Image" style="object-fit: cover; height: 225px;">
+                            <div class="card-body">
+                                <h5 class="card-title">@farmer.FirstName  @farmer.LastName</h5>
+                                <p class="card-text">@farmer.Province</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a asp-controller="Farmer" asp-action="Edit" asp-route-id="@farmer.Id" class="btn btn-sm btn-outline-primary">Edit Profile</a>
+                                        <a asp-controller="Farmer" asp-action="ViewProfile" asp-route-id="@farmer.Id" class="btn btn-sm btn-outline-primary">View Profile</a>                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
 

@@ -1,4 +1,4 @@
-﻿    using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ProgPoe_MVC_AgriEnergyConnect.Data;
 using ProgPoe_MVC_AgriEnergyConnect.Interfaces;
 using ProgPoe_MVC_AgriEnergyConnect.Models;

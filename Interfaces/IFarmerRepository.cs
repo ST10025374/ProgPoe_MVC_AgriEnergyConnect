@@ -29,7 +29,14 @@ namespace ProgPoe_MVC_AgriEnergyConnect.Interfaces
         /// </summary>
         /// <param name="name">The name of the farmer.</param>
         /// <returns>An enumerable collection of farmers with the specified name.</returns>
-        Task<IEnumerable<Farmer>> GetProductByName(string name);
+        Task<IEnumerable<Farmer>> GetFarmerByName(string name);
+
+        /// <summary>
+        /// Retrieves a farmer by their AppUserId.
+        /// </summary>
+        /// <param name="appUserId"></param>
+        /// <returns></returns>
+        Task<int?> GetFarmerIdByAppUserId(string appUserId);
 
         /// <summary>
         /// Adds a new farmer.

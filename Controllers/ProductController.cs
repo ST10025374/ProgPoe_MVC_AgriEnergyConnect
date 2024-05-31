@@ -31,7 +31,6 @@ namespace ProgPoe_MVC_AgriEnergyConnect.Controllers
         {
             IEnumerable<Product> products = await _productRepository.GetAll();
             return View(products);
-            //return View();
         }
 
         //---------------------------------------------------------------------//
@@ -80,7 +79,7 @@ namespace ProgPoe_MVC_AgriEnergyConnect.Controllers
 
         //---------------------------------------------------------------------//
         /// <summary>
-        /// Retuirns the view for editing a product
+        /// Returns the view for editing a product
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

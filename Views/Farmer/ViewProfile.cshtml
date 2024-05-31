@@ -1,0 +1,71 @@
+﻿@model Farmer
+
+@{
+    ViewData["Title"] = "Farmer Profile";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="text-center">
+                <img class="img-fluid profile-image" src="@Model.ProfileImage" alt="Profile Image" style="object-fit: cover; border-radius: 50%; height: 200px; width: 200px;">
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card mb-4 box-shadow">
+                <div class="card-body">
+                    <h2 class="card-title">@Model.FirstName @Model.LastName</h2>
+                    <hr>
+                    <dl class="row">
+                        <dt class="col-sm-3">Location:</dt>
+                        <dd class="col-sm-9">@Model.Location</dd>
+
+                        <dt class="col-sm-3">City:</dt>
+                        <dd class="col-sm-9">@Model.City</dd>
+
+                        <dt class="col-sm-3">Province:</dt>
+                        <dd class="col-sm-9">@Model.Province</dd>
+
+                        <dt class="col-sm-3">Phone Number:</dt>
+                        <dd class="col-sm-9">@Model.PhoneNumber</dd>
+                    </dl>
+                    <hr>
+                    <div class="d-flex justify-content-between align-items-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .profile-image {
+        border: 2px solid #ddd;
+        padding: 5px;
+        background-color: #f8f9fa;
+    }
+
+    hr {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .card-title {
+        font-size: 24px;
+        margin-bottom: 0.5rem;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+</style>

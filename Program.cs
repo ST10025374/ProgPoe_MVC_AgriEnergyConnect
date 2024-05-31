@@ -13,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IFarmerRepository, FarmerRepository>();
 builder.Services.AddScoped<IPhotoService, PhotoService>();
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
