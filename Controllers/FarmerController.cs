@@ -54,13 +54,13 @@ namespace ProgPoe_MVC_AgriEnergyConnect.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateFarmerViewModel farmerVM)
         {
-            var valid = _farmerRepository.GetFarmerIdByAppUserId(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            //var valid = _farmerRepository.GetFarmerIdByAppUserId(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            if (valid != null)
-            {
-                ModelState.AddModelError("", "You already have a farmer profile");
-                return View(farmerVM);
-            }
+            //if (valid != null)
+            //{
+            //    ModelState.AddModelError("", "You already have a farmer profile");
+            //    return View(farmerVM);
+            //}
 
             if (ModelState.IsValid)
             {
